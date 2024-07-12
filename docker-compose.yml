@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  server:
+    build: .
+    volumes:
+      - ./src:/app
+#    env_file:
+#      - env_vars
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+
+  db:
+    image: postgres:15.2
+    restart: unless-stopped
+#    env_file:
+#      - env_vars
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+    volumes:
+      - ./conf/initdb.sql:/docker-entrypoint-initdb.d/01-init-db.sql
