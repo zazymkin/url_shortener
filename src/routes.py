@@ -13,6 +13,7 @@ async def generate_short_url(request):
 
     long_url = data["long_url"]
 
+    # todo handle collisions
     short_url = "".join(
         random.choices(string.ascii_letters + string.digits, k=5)
     )
